@@ -1,0 +1,277 @@
+# robots.txt for python-docsbox-mcp
+# This server is published documentation + tooling for LLM coding agents.
+# All search engines and AI crawlers are explicitly welcome to read the
+# landing page, the tool index, and the llms.txt files.
+#
+# Spec references:
+#   https://www.rfc-editor.org/rfc/rfc9309
+#   https://llmstxt.org/
+
+# ---------------------------------------------------------------------
+# Default policy: allow everything except the JSON-RPC transport.
+# ---------------------------------------------------------------------
+User-agent: *
+Allow: /
+Disallow: /mcp
+
+# ---------------------------------------------------------------------
+# Explicit allow entries for major search-engine crawlers.
+# (Redundant with the wildcard above, but some operators audit by name
+# and we want zero ambiguity.)
+# ---------------------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+Disallow: /mcp
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /mcp
+
+User-agent: Googlebot-News
+Allow: /
+Disallow: /mcp
+
+User-agent: Bingbot
+Allow: /
+Disallow: /mcp
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /mcp
+
+User-agent: YandexBot
+Allow: /
+Disallow: /mcp
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /mcp
+
+User-agent: Slurp
+Allow: /
+Disallow: /mcp
+
+User-agent: Applebot
+Allow: /
+Disallow: /mcp
+
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /mcp
+
+User-agent: LinkedInBot
+Allow: /
+Disallow: /mcp
+
+User-agent: Twitterbot
+Allow: /
+Disallow: /mcp
+
+User-agent: Slackbot
+Allow: /
+Disallow: /mcp
+
+User-agent: Discordbot
+Allow: /
+Disallow: /mcp
+
+User-agent: Pinterestbot
+Allow: /
+Disallow: /mcp
+
+# ---------------------------------------------------------------------
+# Explicit allow entries for AI / LLM crawlers (training + retrieval).
+# ---------------------------------------------------------------------
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+Disallow: /mcp
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /mcp
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /mcp
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+Disallow: /mcp
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /mcp
+
+User-agent: Claude-User
+Allow: /
+Disallow: /mcp
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /mcp
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /mcp
+
+# Google AI (separate opt-in token from Googlebot)
+User-agent: Google-Extended
+Allow: /
+Disallow: /mcp
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /mcp
+
+# Apple AI (separate opt-in token from Applebot)
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /mcp
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+Disallow: /mcp
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /mcp
+
+# Common Crawl (feeds many AI training pipelines)
+User-agent: CCBot
+Allow: /
+Disallow: /mcp
+
+# Meta / Facebook AI
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /mcp
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /mcp
+
+User-agent: FacebookBot
+Allow: /
+Disallow: /mcp
+
+# ByteDance / TikTok
+User-agent: Bytespider
+Allow: /
+Disallow: /mcp
+
+# DuckDuckGo AI
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /mcp
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+Disallow: /mcp
+
+# Cohere
+User-agent: Cohere-AI
+Allow: /
+Disallow: /mcp
+
+User-agent: cohere-training-data-crawler
+Allow: /
+Disallow: /mcp
+
+# Allen Institute for AI
+User-agent: AI2Bot
+Allow: /
+Disallow: /mcp
+
+User-agent: AI2Bot-Dolma
+Allow: /
+Disallow: /mcp
+
+# Diffbot (used in many AI pipelines)
+User-agent: Diffbot
+Allow: /
+Disallow: /mcp
+
+# You.com
+User-agent: YouBot
+Allow: /
+Disallow: /mcp
+
+# Timpi
+User-agent: Timpibot
+Allow: /
+Disallow: /mcp
+
+# Webz / Webzio
+User-agent: Webzio-Extended
+Allow: /
+Disallow: /mcp
+
+# Sift / image AI
+User-agent: ImagesiftBot
+Allow: /
+Disallow: /mcp
+
+# Omgili / Webz
+User-agent: Omgilibot
+Allow: /
+Disallow: /mcp
+
+# Sidetrade
+User-agent: Sidetrade-indexer-bot
+Allow: /
+Disallow: /mcp
+
+# Quora
+User-agent: Quora-Bot
+Allow: /
+Disallow: /mcp
+
+# Andi
+User-agent: Andibot
+Allow: /
+Disallow: /mcp
+
+# Huawei PanGu
+User-agent: PanguBot
+Allow: /
+Disallow: /mcp
+
+# Cognition Devin
+User-agent: Devin
+Allow: /
+Disallow: /mcp
+
+# Amazon Bedrock
+User-agent: bedrockbot
+Allow: /
+Disallow: /mcp
+
+# DataForSEO (used by AI tooling)
+User-agent: DataForSeoBot
+Allow: /
+Disallow: /mcp
+
+# Magpie / Brandwatch
+User-agent: Magpie-Crawler
+Allow: /
+Disallow: /mcp
+
+# Awario
+User-agent: Awario
+Allow: /
+Disallow: /mcp
+
+# iAsk
+User-agent: iaskspider/2.0
+Allow: /
+Disallow: /mcp
+
+# ---------------------------------------------------------------------
+# Sitemap + LLM index pointers
+# ---------------------------------------------------------------------
+Sitemap: https://python-mcp.afterrealism.com/sitemap.xml

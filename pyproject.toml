@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-docsbox-mcp"
+version = "0.1.0"
+description = "Streamable-HTTP MCP server with Python docs, linting, formatting, type-checking, PEP lookup, and local-execution planning."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "afterrealism" }]
+requires-python = ">=3.11"
+dependencies = [
+  "mcp>=1.6",
+  "starlette>=0.41",
+  "uvicorn[standard]>=0.32",
+  "httpx>=0.28",
+  "pydantic>=2.10",
+  "tomli>=2.0; python_version<'3.11'",
+  "ruff>=0.7",
+  "pyright>=1.1.390",
+  "platformdirs>=4.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "pytest-asyncio>=0.24",
+  "anyio>=4.7",
+]
+
+[project.scripts]
+python-docsbox-mcp = "python_docsbox_mcp.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/python_docsbox_mcp"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/python_docsbox_mcp/web/index.html" = "python_docsbox_mcp/web/index.html"
+"src/python_docsbox_mcp/web/robots.txt" = "python_docsbox_mcp/web/robots.txt"
+"src/python_docsbox_mcp/web/sitemap.xml" = "python_docsbox_mcp/web/sitemap.xml"
+"src/python_docsbox_mcp/web/llms.txt" = "python_docsbox_mcp/web/llms.txt"
+"src/python_docsbox_mcp/web/llms-full.txt" = "python_docsbox_mcp/web/llms-full.txt"
+"corpus/manifest.toml" = "python_docsbox_mcp/_data/manifest.toml"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501", "B008"]
+extend-safe-fixes = ["UP", "I"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["pydantic.Field"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.11"
+typeCheckingMode = "standard"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

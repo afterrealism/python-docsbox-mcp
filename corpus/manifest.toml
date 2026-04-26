@@ -1,0 +1,196 @@
+# Fallback offline section manifest for python-docsbox-mcp.
+# Each entry maps a stable id to a human-friendly section title and the
+# canonical online URL the agent should consult when offline content is
+# unavailable.
+
+[[section]]
+id = "stdlib/asyncio"
+title = "asyncio, Asynchronous I/O"
+url = "https://docs.python.org/3/library/asyncio.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/typing"
+title = "typing, Support for type hints"
+url = "https://docs.python.org/3/library/typing.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/dataclasses"
+title = "dataclasses, Data Classes"
+url = "https://docs.python.org/3/library/dataclasses.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/contextlib"
+title = "contextlib, Context manager utilities"
+url = "https://docs.python.org/3/library/contextlib.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/functools"
+title = "functools, Higher-order functions"
+url = "https://docs.python.org/3/library/functools.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/itertools"
+title = "itertools, Iterator building blocks"
+url = "https://docs.python.org/3/library/itertools.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/pathlib"
+title = "pathlib, Object-oriented filesystem paths"
+url = "https://docs.python.org/3/library/pathlib.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/json"
+title = "json, JSON encoder and decoder"
+url = "https://docs.python.org/3/library/json.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/subprocess"
+title = "subprocess, Subprocess management"
+url = "https://docs.python.org/3/library/subprocess.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/multiprocessing"
+title = "multiprocessing, Process-based parallelism"
+url = "https://docs.python.org/3/library/multiprocessing.html"
+package = "stdlib"
+
+[[section]]
+id = "stdlib/concurrent.futures"
+title = "concurrent.futures, Launching parallel tasks"
+url = "https://docs.python.org/3/library/concurrent.futures.html"
+package = "stdlib"
+
+[[section]]
+id = "pydantic/models"
+title = "Pydantic, Models"
+url = "https://docs.pydantic.dev/latest/concepts/models/"
+package = "pydantic"
+
+[[section]]
+id = "pydantic/validators"
+title = "Pydantic, Validators"
+url = "https://docs.pydantic.dev/latest/concepts/validators/"
+package = "pydantic"
+
+[[section]]
+id = "fastapi/tutorial"
+title = "FastAPI, Tutorial"
+url = "https://fastapi.tiangolo.com/tutorial/"
+package = "fastapi"
+
+[[section]]
+id = "fastapi/dependencies"
+title = "FastAPI, Dependencies"
+url = "https://fastapi.tiangolo.com/tutorial/dependencies/"
+package = "fastapi"
+
+[[section]]
+id = "starlette/routing"
+title = "Starlette, Routing"
+url = "https://www.starlette.io/routing/"
+package = "starlette"
+
+[[section]]
+id = "httpx/quickstart"
+title = "HTTPX, Quickstart"
+url = "https://www.python-httpx.org/quickstart/"
+package = "httpx"
+
+[[section]]
+id = "httpx/async-client"
+title = "HTTPX, AsyncClient"
+url = "https://www.python-httpx.org/async/"
+package = "httpx"
+
+[[section]]
+id = "sqlalchemy/orm"
+title = "SQLAlchemy, ORM"
+url = "https://docs.sqlalchemy.org/en/20/orm/"
+package = "sqlalchemy"
+
+[[section]]
+id = "numpy/quickstart"
+title = "NumPy, Quickstart"
+url = "https://numpy.org/doc/stable/user/quickstart.html"
+package = "numpy"
+
+[[section]]
+id = "pandas/getting-started"
+title = "pandas, Getting started"
+url = "https://pandas.pydata.org/docs/getting_started/index.html"
+package = "pandas"
+
+[[section]]
+id = "polars/user-guide"
+title = "Polars, User Guide"
+url = "https://docs.pola.rs/"
+package = "polars"
+
+[[section]]
+id = "pytest/getting-started"
+title = "pytest, Getting started"
+url = "https://docs.pytest.org/en/stable/getting-started.html"
+package = "pytest"
+
+[[section]]
+id = "pytest/fixtures"
+title = "pytest, Fixtures"
+url = "https://docs.pytest.org/en/stable/explanation/fixtures.html"
+package = "pytest"
+
+[[section]]
+id = "ruff/rules"
+title = "Ruff, Rules"
+url = "https://docs.astral.sh/ruff/rules/"
+package = "ruff"
+
+[[section]]
+id = "ruff/configuration"
+title = "Ruff, Configuration"
+url = "https://docs.astral.sh/ruff/configuration/"
+package = "ruff"
+
+[[section]]
+id = "pyright/configuration"
+title = "Pyright, Configuration"
+url = "https://microsoft.github.io/pyright/#/configuration"
+package = "pyright"
+
+[[section]]
+id = "uv/getting-started"
+title = "uv, Getting started"
+url = "https://docs.astral.sh/uv/getting-started/"
+package = "uv"
+
+[[section]]
+id = "click/quickstart"
+title = "Click, Quickstart"
+url = "https://click.palletsprojects.com/en/stable/quickstart/"
+package = "click"
+
+[[section]]
+id = "rich/console"
+title = "Rich, Console"
+url = "https://rich.readthedocs.io/en/stable/console.html"
+package = "rich"
+
+[[section]]
+id = "mcp/python-sdk"
+title = "Model Context Protocol, Python SDK"
+url = "https://modelcontextprotocol.io/quickstart/server"
+package = "mcp"
+
+[[section]]
+id = "mcp/transport"
+title = "Model Context Protocol, Transport"
+url = "https://modelcontextprotocol.io/specification/2025-06-18/basic/transports"
+package = "mcp"

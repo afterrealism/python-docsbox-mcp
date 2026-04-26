@@ -1,0 +1,89 @@
+@import '@unocss/reset/tailwind.css';
+
+:root {
+  color-scheme: light dark;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --code-bg: #f8fafc;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.10);
+  --header-bg: rgba(255, 255, 255, 0.85);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1020;
+    --fg: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #1f2a44;
+    --code-bg: #11172b;
+    --accent: #60a5fa;
+    --accent-soft: rgba(96, 165, 250, 0.14);
+    --header-bg: rgba(11, 16, 32, 0.85);
+  }
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+::selection { background: var(--accent-soft); color: var(--fg); }
+
+.prose h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 2.5rem 0 0.75rem;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+.prose h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.prose p { margin: 0.75rem 0; color: var(--fg); }
+.prose p.muted { color: var(--muted); }
+
+.tool-grid { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+.tool-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  background: var(--bg);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.tool-card:hover { border-color: var(--accent); }
+.tool-card code {
+  font-size: 0.92rem;
+  color: var(--accent);
+  background: transparent;
+  padding: 0;
+}
+.tool-card p { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.45; }
+
+.toc-link {
+  display: block;
+  padding: 0.25rem 0.6rem;
+  color: var(--muted);
+  border-left: 2px solid transparent;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+.toc-link:hover { color: var(--fg); border-left-color: var(--border); }
+.toc-link.active { color: var(--accent); border-left-color: var(--accent); }

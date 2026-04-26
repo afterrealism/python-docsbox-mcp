@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "python-docsbox": {
+      "transport": {
+        "type": "http",
+        "url": "https://python-mcp.afterrealism.com/mcp"
+      }
+    }
+  }
+}

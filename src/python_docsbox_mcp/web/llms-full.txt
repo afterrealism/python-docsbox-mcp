@@ -1,0 +1,151 @@
+# Python DocsBox MCP, full reference
+
+> A Model Context Protocol (MCP) server that gives LLM coding agents typed access to Python documentation, ruff lint and format, pyright type-check, PEP lookup, pip metadata and an AST dump tool over a single streamable-HTTP endpoint.
+
+This file is a self-contained Markdown dump intended for retrieval by LLM tooling. It mirrors the content of the human-facing landing page at `https://python-mcp.afterrealism.com/` but in a single flat document with no JavaScript, no styling, and stable headings. Crawlers and AI agents are explicitly welcome to ingest, index, and quote from this file.
+
+Last updated: 2026-04-27. License: MIT.
+
+## Identity
+
+- Name: `python-docsbox-mcp`
+- Public endpoint: `https://python-mcp.afterrealism.com/mcp`
+- Transport: MCP streamable HTTP, specification 2025-06-18.
+- Source: <https://github.com/afterrealism/python-docsbox-mcp>
+- Companion server (Rust): <https://rust-mcp.afterrealism.com/>
+
+## Overview
+
+Python DocsBox is a self-contained MCP server. It bundles a snapshot of the Python standard library and popular-package documentation, runs `ruff` and `pyright` in tempdirs with bounded timeouts, parses snippets with the standard library `ast` module, queries pip / PyPI for package metadata, and resolves PEPs by number.
+
+It speaks MCP streamable HTTP (spec 2025-06-18), so any MCP-aware client, OpenCode, Claude Code, Cursor, Continue, can connect with a one-line config.
+
+## Endpoints
+
+- `POST /mcp`, MCP streamable-HTTP transport. All tool calls flow through here.
+- `GET /`, HTML landing page with quickstart, tool list, and trust model.
+- `GET /health`, liveness probe.
+- `GET /robots.txt`, crawler policy. All major search and AI crawlers explicitly allowed; only `/mcp` (the JSON-RPC transport) is disallowed.
+- `GET /sitemap.xml`, sitemap.
+- `GET /llms.txt`, short llmstxt.org index.
+- `GET /llms-full.txt`, this file.
+
+## Quick start
+
+### OpenCode
+
+Add the server to your `opencode.json` under `mcp`:
+
+```json
+{
+  "mcp": {
+    "python-docsbox": {
+      "type": "remote",
+      "url": "https://python-mcp.afterrealism.com/mcp",
+      "enabled": true
+    }
+  }
+}
+```
+
+### Claude Code, Cursor, Continue, any MCP streamable-HTTP client
+
+```json
+{
+  "mcpServers": {
+    "python-docsbox": {
+      "transport": {
+        "type": "http",
+        "url": "https://python-mcp.afterrealism.com/mcp"
+      }
+    }
+  }
+}
+```
+
+### CLI add (OpenCode)
+
+```sh
+opencode mcp add python-docsbox \
+  --transport http \
+  --url https://python-mcp.afterrealism.com/mcp
+```
+
+## Tools
+
+Every tool the agent sees in its tool list is documented below.
+
+### list_sections
+
+Browse indexed Python stdlib and popular-package documentation paths in the bundled corpus.
+
+### get_documentation
+
+Markdown for a single section path returned by `list_sections`. Read-only SQLite + zstd blobs, served from the package data.
+
+### ruff_check
+
+Lint a Python snippet and return JSON diagnostics from `ruff check`. Runs in a tempdir under bounded time and output limits.
+
+### ruff_fix
+
+Auto-apply ruff fixes to a snippet and return the rewritten source.
+
+### ruff_format
+
+Format a snippet with `ruff format`.
+
+### pyright_check
+
+Run `pyright` on a snippet and return diagnostics with locations.
+
+### pep_lookup
+
+Fetch the text and metadata of a PEP by number.
+
+### pip_info
+
+Query PyPI for package metadata: versions, dependencies, project URLs, classifiers.
+
+### ast_dump
+
+Parse a snippet with the standard library `ast` module and return the parse tree.
+
+### run_locally
+
+Emit a plan of shell commands the calling agent should run on the user's machine. The server itself never executes user code; the trust boundary stays at the agent host.
+
+## Documentation corpus
+
+The bundled corpus is a read-only SQLite index plus zstd-compressed markdown blobs, packaged in the wheel as resource data. The index covers the stdlib and a curated set of popular packages. Sections are addressable by path and discoverable via `list_sections`.
+
+To add the server's documentation to an agent's context, you typically wire it through the agent's MCP integration:
+
+```sh
+# OpenCode
+opencode mcp add python-docsbox \
+  --transport http \
+  --url https://python-mcp.afterrealism.com/mcp
+```
+
+After adding, the agent can call `list_sections` to discover paths and `get_documentation` to fetch markdown for any section it needs.
+
+## Trust model
+
+- All linting, formatting, type-checking and AST parsing runs in tempdirs with bounded timeouts and bounded captured output.
+- Tempdirs are cleaned up on exit; no persistent disk state per request.
+- `run_locally` never executes code on the server. It returns a plan; the calling agent dispatches the steps through its own host bash tool.
+- HTTP fetches (PyPI, peps.python.org) follow redirects with bounded timeouts.
+- The wheel ships pinned versions of `ruff` and `pyright` so behaviour is reproducible.
+
+## Architecture
+
+- Implemented in Python on FastMCP + Starlette.
+- MCP layer is `mcp` (the official SDK) with the streamable-HTTP server transport.
+- Documentation corpus is SQLite + zstd blobs, packaged in the wheel via hatchling `force-include`.
+- Container image deployed via Cloudflare Containers + Cloudflare Workers (Durable Objects).
+- TLS, edge caching, and DDoS mitigation handled by Cloudflare; the origin only sees Cloudflare's egress.
+
+## Source and license
+
+<https://github.com/afterrealism/python-docsbox-mcp>, MIT licensed.

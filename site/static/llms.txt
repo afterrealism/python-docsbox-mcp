@@ -1,0 +1,44 @@
+# Python DocsBox MCP
+
+> A Model Context Protocol (MCP) server that gives LLM coding agents typed access to Python documentation, ruff lint and format, pyright type-check, PEP lookup, pip metadata and an AST dump tool over a single streamable-HTTP endpoint at `https://python-mcp.afterrealism.com/mcp`.
+
+Python DocsBox is self-contained: it bundles a snapshot of the Python standard library and popular-package documentation, runs ruff and pyright in tempdirs with bounded timeouts, parses snippets with the standard library `ast` module, queries pip / PyPI for package metadata, and resolves PEPs by number. It speaks MCP streamable-HTTP (spec 2025-06-18), so any MCP-aware client can connect with a one-line config. The server never executes user Python code itself; the `run_locally` tool returns a plan the calling agent dispatches through its own host bash tool.
+
+## Docs
+
+- [Landing page](https://python-mcp.afterrealism.com/): overview, endpoint, quickstart, tool list, trust model.
+- [Health probe](https://python-mcp.afterrealism.com/health): liveness JSON.
+- [README on GitHub](https://github.com/afterrealism/python-docsbox-mcp): repository-level documentation.
+- [llms-full.txt](https://python-mcp.afterrealism.com/llms-full.txt): full Markdown dump of the landing page for retrieval.
+
+## Tools exposed by the server
+
+- `list_sections`: browse indexed Python stdlib and popular-package documentation paths in the bundled corpus.
+- `get_documentation`: fetch the markdown body of a single section path returned by `list_sections`.
+- `ruff_check`: lint a Python snippet and return JSON diagnostics from `ruff check`.
+- `ruff_fix`: auto-apply ruff fixes to a snippet and return the rewritten source.
+- `ruff_format`: format a snippet with `ruff format`.
+- `pyright_check`: run `pyright` on a snippet and return diagnostics with locations.
+- `pep_lookup`: fetch the text and metadata of a PEP by number.
+- `pip_info`: query PyPI for package metadata: versions, dependencies, project URLs, classifiers.
+- `ast_dump`: parse a snippet with the standard library `ast` module and return the parse tree.
+- `run_locally`: emit a plan of shell commands the calling agent should run on the user's machine; the server itself never executes user code.
+
+## Endpoints
+
+- `POST https://python-mcp.afterrealism.com/mcp`: MCP streamable-HTTP transport (spec 2025-06-18).
+- `GET https://python-mcp.afterrealism.com/`: HTML landing page.
+- `GET https://python-mcp.afterrealism.com/health`: liveness probe.
+- `GET https://python-mcp.afterrealism.com/robots.txt`: crawler policy (all major search and AI crawlers explicitly allowed).
+- `GET https://python-mcp.afterrealism.com/sitemap.xml`: sitemap.
+- `GET https://python-mcp.afterrealism.com/llms.txt`: this file.
+- `GET https://python-mcp.afterrealism.com/llms-full.txt`: full Markdown dump.
+
+## Optional
+
+- [MCP specification 2025-06-18](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports): transport spec the server implements.
+- [Ruff](https://docs.astral.sh/ruff/): the linter and formatter `ruff_check`, `ruff_fix`, `ruff_format` invoke.
+- [Pyright](https://github.com/microsoft/pyright): the type checker `pyright_check` invokes.
+- [PyPI](https://pypi.org/): the upstream package registry `pip_info` queries.
+- [PEPs](https://peps.python.org/): the corpus `pep_lookup` resolves against.
+- [Companion Rust server](https://rust-mcp.afterrealism.com/): same shape, Rust tooling.
